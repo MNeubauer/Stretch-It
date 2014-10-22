@@ -1,17 +1,18 @@
-using system
+using System;
+using System.Collections.Generic;
 
-namespace Stretch-It 
+namespace StretchIt 
 {
-    private List<Gesture> gestures;
-    private Random random;
-    bool push = true;
-    bool pull = true;
-
     class Model {
+        private List<Gesture> gestures;
+        private Random random;
+        bool push = true;
+        bool pull = true;
+
         public Model()
         {
             // Initialize members.
-            gestures = new List<Gestures>();
+            gestures = new List<Gesture>();
             random = new Random();
 
             // Add each gesture that was selected in the options screen
@@ -27,7 +28,7 @@ namespace Stretch-It
         // Will return 
         public Gesture get_gesture()
         {
-            return random.Next(gestures.Count);
+            return gestures[random.Next(gestures.Count)];
         }
     }
 }

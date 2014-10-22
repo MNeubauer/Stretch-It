@@ -1,10 +1,10 @@
-using system
+using System;
 
-namespace Stretch-It 
+namespace StretchIt 
 {
     class Driver {
 
-        Public model;
+        public static Model model;
 
         static void Main(string[] args)
         {
@@ -15,7 +15,7 @@ namespace Stretch-It
         private static void run_game()
         {
             int reps = 10;
-            for(int i = 0; i < reps; ++reps) {
+            for(int i = 0; i < reps; ++i) {
                 model.get_gesture().do_gesture();
             }
         }

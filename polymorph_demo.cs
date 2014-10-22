@@ -1,9 +1,9 @@
-using system
+using System;
 
-namespace Stretch-It 
+namespace StretchIt 
 {
     abstract class Gesture {
-        public virtual int do_gesture() {}
+        abstract public int do_gesture();
     }
 
     class Push : Gesture {
