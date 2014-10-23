@@ -10,6 +10,7 @@ namespace StretchIt
         private Dictionary<string, Gesture> gestures;
         private Random random;
         private Dictionary<string, bool> active_gestures;
+        private List<string> keys;
 
         public Model()
         {
@@ -26,19 +27,19 @@ namespace StretchIt
             // to the gestures List.
             gestures[PULL_C] = new Pull();
             gestures[PUSH_C] = new Push();
-        }
 
-        // Will return 
-        public Gesture get_gesture()
-        {
-            List<string> keys = new List<string>();
-
+            // Create a list of the keys of all active gestures
+            keys = new List<string>();
             foreach (KeyValuePair<string, bool> entry in active_gestures)
             {
                 if (entry.Value)
                     keys.Add(entry.Key);
             }
+        }
 
+        // Will return 
+        public Gesture get_gesture()
+        {
             return gestures[keys[random.Next(keys.Count)]];
         }
     }
