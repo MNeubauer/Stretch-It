@@ -9,19 +9,13 @@ namespace StretchIt
 
         private Dictionary<string, Gesture> gestures;
         private Random random;
-        private Dictionary<string, bool> active_gestures;
-        private List<string> keys;
+        private List<string> gesture_names;
 
         public Model()
         {
             // Initialize members.
             gestures = new Dictionary<string, Gesture>();
             random = new Random();
-            active_gestures = new Dictionary<string, bool>();
-
-            // Set each gesture to active (true)
-            active_gestures[PULL_C] = true;
-            active_gestures[PUSH_C] = true;
 
             // Add each gesture that was selected in the options screen
             // to the gestures List.
@@ -29,18 +23,20 @@ namespace StretchIt
             gestures[PUSH_C] = new Push();
 
             // Create a list of the keys of all active gestures
-            keys = new List<string>();
-            foreach (KeyValuePair<string, bool> entry in active_gestures)
+            gesture_names = new List<string>();
+            foreach (KeyValuePair<string, Gesture> entry in gestures)
             {
-                if (entry.Value)
-                    keys.Add(entry.Key);
+                if (entry.Value.is_active)
+                    gesture_names.Add(entry.Key);
             }
         }
 
         // Will return 
         public Gesture get_gesture()
         {
-            return gestures[keys[random.Next(keys.Count)]];
+            int rand = random.Next(gesture_names.Count);
+            
+            return gestures[gesture_names[rand]];
         }
     }
 }

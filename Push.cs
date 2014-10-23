@@ -5,10 +5,23 @@ namespace StretchIt
     class Push : Gesture {
         public Push(): base()
         {}
-        public override int do_gesture()
+
+        public override void outputGesture()
         {
             Console.WriteLine("Push Gesture");
-            return 0; 
+        }
+
+        public override bool getGestureInput()
+        {
+            return true;
+        }
+
+        public override void outputFeedback(bool correct)
+        {
+            if (correct)
+                Console.WriteLine("Correct Push Gesture!");
+            else
+                Console.WriteLine("Incorrect Push Gesture!");
         }
     }
 }
