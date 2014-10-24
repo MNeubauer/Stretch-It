@@ -1,0 +1,11 @@
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\bin\Debug\DepthBasics-WPF.exe
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\bin\Debug\DepthBasics-WPF.pdb
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\MainWindow.baml
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\MainWindow.g.cs
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\App.g.cs
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\DepthBasics-WPF_MarkupCompile.cache
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\DepthBasics-WPF.g.resources
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.DepthBasics.Properties.Resources.resources
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\DepthBasics-WPF.csproj.GenerateResource.Cache
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\DepthBasics-WPF.exe
+C:\Program Files\Microsoft SDKs\Kinect\Developer Toolkit v1.8.0\Samples\C#\DepthBasics-WPF\obj\Debug\DepthBasics-WPF.pdb
