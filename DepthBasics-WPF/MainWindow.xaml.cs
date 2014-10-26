@@ -163,14 +163,19 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
                         textBox1.Text = minDepth.ToString();
                         textBox2.Text = maxDepth.ToString();
-                        if (this.min_frame_depth - minDepth > 30)
+                        if (this.min_frame_depth - minDepth > 50)
                         {
-                            System.Console.WriteLine("Push Recognized");
+                            textBox1.Text = "Push Recognized";
                         }
 
-                        else if (maxDepth - this.max_frame_depth > 30)
+                        else if (maxDepth - this.max_frame_depth > 50)
                         {
-                            System.Console.WriteLine("Pull Recognized");
+                            textBox2.Text = "Pull Recognized";
+                        }
+                        else
+                        {
+                            textBox1.Text = minDepth.ToString();
+                            textBox2.Text = maxDepth.ToString();
                         }
                     }
                     this.frame_num++;
