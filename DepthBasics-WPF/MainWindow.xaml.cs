@@ -12,6 +12,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using System.Threading;
     using Microsoft.Kinect;
 
     /// <summary>
@@ -24,8 +25,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
         /// </summary>
         private KinectSensor sensor;
 
-        private Driver gameDriver = new Driver();
-
+        private Model model;
         /// <summary>
         /// Bitmap that will hold color information
         /// </summary>
@@ -43,10 +43,17 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
         private int frame_num;
         DepthImageFrame first_frame;
-        DepthImageFrame cur_frame;
         private int min_frame_depth;
         private int max_frame_depth;
-
+        private int[] commands;
+        private int counter;
+        private int num_correct;
+        private bool recognizedGesture;
+        private enum Commands
+        {
+            Push,
+            Pull
+        };
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
@@ -105,7 +112,6 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 this.sensor.ColorFrameReady += this.SensorColorFrameReady;
 
                 this.frame_num = 0;
-                this.cur_frame = 0;
                 this.first_frame = null;
                 // Start the sensor!
                 try
@@ -116,13 +122,28 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 {
                     this.sensor = null;
                 }
+                this.counter = 0;
+                this.commands = new int[10];
+                this.num_correct = 0;
+                for (int i = 0; i < 10; ++i)
+                {
+                    commands[i] = i % 2;
+                }
+                this.recognizedGesture = false;
             }
 
             if (null == this.sensor)
             {
                 this.statusBarText.Text = Properties.Resources.NoKinectReady;
             }
-            gameDriver.startGame();
+            this.sensor.DepthStream.Range = DepthRange.Near;
+
+            model = new Model();
+            int reps = 10;
+            for (int i = 0; i < reps; ++i)
+            {
+                model.get_gesture().do_gesture();
+            }
         }
 
         /// <summary>
@@ -148,8 +169,33 @@ namespace Microsoft.Samples.Kinect.DepthBasics
             //System.Console.WriteLine("HEY");
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
             {
+               /* if ((frame_num % 30) != 0 || recognizedGesture)
+                {
+                    textBox1.Text = frame_num.ToString();
+                    frame_num++;
+
+                    return;
+                }*/
+                recognizedGesture = false;
+                if (counter < 10)
+                {
+                    switch ((Commands)commands[counter])
+                    {
+                        case Commands.Push:
+                            commandTextBox.Text = "Execute a Push!";
+                            break;
+                        case Commands.Pull:
+                            commandTextBox.Text = "Execute a Pull!";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else return;
+
                 if (depthFrame != null)
                 {
+
                     //if this is the first frame, save it
                     if (this.frame_num == 0)
                     {
@@ -171,12 +217,36 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                         textBox2.Text = maxDepth.ToString();
                         if (this.min_frame_depth - minDepth > 50)
                         {
-                            textBox1.Text = "Push Recognized";
+                            if ((Commands)commands[counter] != Commands.Push)
+                            {
+                                scoreBox.Text = "";
+                            }
+                            else
+                            {
+                                counter++;
+                                num_correct++;
+                                textBox3.Text = num_correct.ToString();
+                                textBox1.Text = "Push Recognized";
+                            }
+                            //recognizedGesture = true;
                         }
 
                         else if (maxDepth - this.max_frame_depth > 50)
                         {
-                            textBox2.Text = "Pull Recognized";
+                            if ((Commands)commands[counter] != Commands.Pull)
+                            {
+                                scoreBox.Text = "";
+
+                            }
+                            else
+                            {
+                                counter++;
+                                num_correct++;
+                                textBox3.Text = num_correct.ToString();
+
+                                textBox1.Text = "Pull Recognized";
+                            }
+                            //recognizedGesture = true;
                         }
                         else
                         {
@@ -184,7 +254,6 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                             textBox2.Text = maxDepth.ToString();
                         }
                     }
-                    this.cur_frame = depthFrame;
                     this.frame_num++;
 
                 }
@@ -320,7 +389,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
         private void captureButton_Click(object sender, RoutedEventArgs e)
         {
-            this.first_frame = this.cur_frame;
+            this.frame_num = 0;
             return;
         }
     }

@@ -8,6 +8,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
     class Driver {
 
         public static Model model;
+        private MainWindow window;
 
         enum Menu {
             Home,
@@ -19,6 +20,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
         public void startGame()
         {
             model = new Model();
+
             run_game();
         }
 
@@ -28,6 +30,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 // Start menu
                 Menu option = Menu.Home;
                 while(option != Menu.StartGame) {
+                    window = new MainWindow();
                     switch(option)
                     {
                         case Menu.Home:
