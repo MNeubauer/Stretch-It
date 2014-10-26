@@ -36,6 +36,8 @@ namespace StretchIt
                     }
                 }
 
+                //start kinect here
+
                 int reps = 10;
                 for(int i = 0; i < reps; ++i) {
                     model.get_gesture().do_gesture();
