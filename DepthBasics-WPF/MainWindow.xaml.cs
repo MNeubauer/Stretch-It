@@ -24,6 +24,8 @@ namespace Microsoft.Samples.Kinect.DepthBasics
         /// </summary>
         private KinectSensor sensor;
 
+        private Driver gameDriver = new Driver();
+
         /// <summary>
         /// Bitmap that will hold color information
         /// </summary>
@@ -51,6 +53,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         /// <summary>
@@ -119,6 +122,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
             {
                 this.statusBarText.Text = Properties.Resources.NoKinectReady;
             }
+            gameDriver.startGame();
         }
 
         /// <summary>

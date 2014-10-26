@@ -19,7 +19,6 @@ namespace Microsoft.Samples.Kinect.DepthBasics
         public void startGame()
         {
             model = new Model();
-            Debug.Print("WAZZZUP");
             run_game();
         }
 
