@@ -163,57 +163,22 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
                         textBox1.Text = minDepth.ToString();
                         textBox2.Text = maxDepth.ToString();
-                        if (this.min_frame_depth - minDepth > 30)
+                        if (this.min_frame_depth - minDepth > 50)
                         {
-                            System.Console.WriteLine("Push Recognized");
+                            textBox1.Text = "Push Recognized";
                         }
 
-                        else if (maxDepth - this.max_frame_depth > 30)
+                        else if (maxDepth - this.max_frame_depth > 50)
                         {
-                            System.Console.WriteLine("Pull Recognized");
+                            textBox2.Text = "Pull Recognized";
+                        }
+                        else
+                        {
+                            textBox1.Text = minDepth.ToString();
+                            textBox2.Text = maxDepth.ToString();
                         }
                     }
                     this.frame_num++;
-                    // this.colorPixels = GenerateColoredBytes(depthFrame);
-
-                    //// Convert the depth to RGB
-                    //int colorPixelIndex = 0;
-                    //for (int i = 0; i < this.depthPixels.Length; ++i)
-                    //{
-                    //    // Get the depth for this pixel
-                    //    short depth = depthPixels[i].Depth;
-
-                    //    // To convert to a byte, we're discarding the most-significant
-                    //    // rather than least-significant bits.
-                    //    // We're preserving detail, although the intensity will "wrap."
-                    //    // Values outside the reliable depth range are mapped to 0 (black).
-
-                    //    // Note: Using conditionals in this loop could degrade performance.
-                    //    // Consider using a lookup table instead when writing production code.
-                    //    // See the KinectDepthViewer class used by the KinectExplorer sample
-                    //    // for a lookup table example.
-                    //    byte intensity = (byte)(depth >= minDepth && depth <= maxDepth ? depth : 0);
-
-                    //    // Write out blue byte
-                    //    this.colorPixels[colorPixelIndex++] = intensity;
-
-                    //    // Write out green byte
-                    //    this.colorPixels[colorPixelIndex++] = intensity;
-
-                    //    // Write out red byte                        
-                    //    this.colorPixels[colorPixelIndex++] = intensity;
-                                                
-                    //    // We're outputting BGR, the last byte in the 32 bits is unused so skip it
-                    //    // If we were outputting BGRA, we would write alpha here.
-                    //    ++colorPixelIndex;
-                    //}
-
-                    // Write the pixel data into our bitmap
-                    /*this.colorBitmap.WritePixels(
-                        new Int32Rect(0, 0, this.colorBitmap.PixelWidth, this.colorBitmap.PixelHeight),
-                        this.colorPixels,
-                        this.colorBitmap.PixelWidth * sizeof(int),
-                        0);*/
                 }
             }
         }
@@ -251,44 +216,6 @@ namespace Microsoft.Samples.Kinect.DepthBasics
             }
             return result;
         }
-        /*private byte[] GenerateColoredBytes(DepthImageFrame depthImageFrame)
-        {
-            short[] rawDepthData = new short[depthImageFrame.PixelDataLength];
-            depthImageFrame.CopyPixelDataTo(rawDepthData);
-
-            Byte[] pixels = new byte[depthImageFrame.Height * depthImageFrame.Width * 4];
-
-            const int BlueIndex = 0;
-            const int GreenIndex = 1;
-            const int RedIndex = 2;
-
-            for (int depthIndex = 0, colorIndex = 0;
-                depthIndex < rawDepthData.Length && colorIndex < pixels.Length;
-                depthIndex++, colorIndex += 4)
-            {
-                int depth = rawDepthData[depthIndex] >> DepthImageFrame.PlayerIndexBitmaskWidth;
-
-                if (depth <= 900)
-                {
-                    pixels[colorIndex + BlueIndex] = 255;
-                    pixels[colorIndex + GreenIndex] = 0;
-                    pixels[colorIndex + RedIndex] = 0;
-                }
-                else if(depth > 900 && depth < 2000)
-                {
-                    pixels[colorIndex + BlueIndex] = 0;
-                    pixels[colorIndex + GreenIndex] = 255;
-                    pixels[colorIndex + RedIndex] = 0;
-                }
-                else if (depth > 2000)
-                {
-                    pixels[colorIndex + BlueIndex] = 0;
-                    pixels[colorIndex + GreenIndex] = 0;
-                    pixels[colorIndex + RedIndex] = 255;
-                }
-            }
-            return pixels;
-        }*/
 
         /// <summary>
         /// Event handler for Kinect sensor's ColorFrameReady event
