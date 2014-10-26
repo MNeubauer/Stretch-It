@@ -41,6 +41,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
         private int frame_num;
         DepthImageFrame first_frame;
+        DepthImageFrame cur_frame;
         private int min_frame_depth;
         private int max_frame_depth;
 
@@ -81,7 +82,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
 
                 // Turn on the color stream to receive color frames
                 this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
-                
+
                 // Allocate space to put the depth pixels we'll receive
                 this.depthPixels = new DepthImagePixel[this.sensor.DepthStream.FramePixelDataLength];
 
@@ -101,6 +102,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 this.sensor.ColorFrameReady += this.SensorColorFrameReady;
 
                 this.frame_num = 0;
+                this.cur_frame = 0;
                 this.first_frame = null;
                 // Start the sensor!
                 try
@@ -178,7 +180,9 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                             textBox2.Text = maxDepth.ToString();
                         }
                     }
+                    this.cur_frame = depthFrame;
                     this.frame_num++;
+
                 }
             }
         }
@@ -216,6 +220,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
             }
             return result;
         }
+
 
         /// <summary>
         /// Event handler for Kinect sensor's ColorFrameReady event
@@ -281,7 +286,7 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 this.statusBarText.Text = string.Format(CultureInfo.InvariantCulture, "{0} {1}", Properties.Resources.ScreenshotWriteFailed, path);
             }
         }
-        
+
         /// <summary>
         /// Handles the checking or unchecking of the near mode combo box
         /// </summary>
@@ -307,6 +312,12 @@ namespace Microsoft.Samples.Kinect.DepthBasics
                 {
                 }
             }
+        }
+
+        private void captureButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.first_frame = this.cur_frame;
+            return;
         }
     }
 }

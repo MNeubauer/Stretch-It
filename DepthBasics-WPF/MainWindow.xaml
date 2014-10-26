@@ -48,7 +48,7 @@
                                     <Image x:Name="UncheckedNormal" Source="Images\UncheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
                                     <Image x:Name="UncheckedHover" Source="Images\UncheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
                                 </Grid>
-                                <TextBlock x:Name="SquareCheckBoxText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15"  Margin="9,0,0,0"/>                          
+                                <TextBlock x:Name="SquareCheckBoxText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15"  Margin="9,0,0,0"/>
                             </StackPanel>
                         </Grid>
                         <ControlTemplate.Triggers>
@@ -63,11 +63,11 @@
                                 <Setter Property="Visibility" Value="Visible" TargetName="UncheckedHover"/>
                                 <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="SquareCheckBoxText"/>
                             </Trigger>
-                       </ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>        
+        </Style>
     </Window.Resources>
 
     <Grid Name="layoutGrid" Margin="10 0 10 0">
@@ -92,7 +92,8 @@
                 <TextBlock Name="statusBarText" Margin="-1 0 0 0">Press 'Screenshot' to save a screenshot to your 'My Pictures' directory.</TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="30" Margin="266,14,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.271,-1.036"/>
-        <TextBlock x:Name="textBox2" HorizontalAlignment="Left" Margin="473,14,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="24" Width="80"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="30" Margin="339,558,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.271,-1.036" Grid.RowSpan="2"/>
+        <TextBlock x:Name="textBox2" HorizontalAlignment="Left" Margin="522,5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="24" Width="80"/>
+        <Button x:Name="captureButton" Content="Calibrate" HorizontalAlignment="Left" Margin="155,9,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="captureButton_Click"/>
     </Grid>
 </Window>
